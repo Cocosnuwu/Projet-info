@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -360,7 +361,7 @@ void echange(case_tableau tab[][20],int taille){
   
   //boucle pour recommencer après chaque échange  
   int erreur=0; 
-  while(erreur==0){ 
+  //while(erreur==0){    mit en commentaire pour que le code fonctionne
     char case1, case2;
   
     
@@ -612,16 +613,197 @@ void echange(case_tableau tab[][20],int taille){
 
 //afficher tbl après l'échange : ??
 
-}  
+//}  
 
+}
+
+
+bool détectionblocage(case_tableau tab[][20],int taille){         //voir annexe des cas si besoin
+    int i,j,k;
+    bool verifblocage;
+    verifblocage=1;
+    for(i=0;i<taille;i++){
+        for(j=0;j<taille;j++){
+            if((tab[i][j].caractere==tab[i][j+1].caractere)&&(j>=2&&j<=taille-4&&i>=1&&i<=taille-2)){
+                if(tab[i][j].caractere==tab[i][j-2].caractere||tab[i][j].caractere==tab[i-1][j-1].caractere||tab[i][j].caractere==tab[i+1][j-1].caractere||tab[i][j].caractere==tab[i][j+3].caractere||tab[i][j].caractere==tab[i-1][j+2].caractere||tab[i][j].caractere==tab[i+1][j+2].caractere){   //condition  pour le cas 1
+                    return 0;    
+                }
+            }
+            
+            
+            if(j==0){           //pour les doubles et simples sur la gauche         
+                if(i>=1&&i<=taille-2){
+                    if(tab[i][0].caractere==tab[i][taille-1].caractere){            
+                        if(tab[i][0].caractere==tab[i][taille-3].caractere||tab[i][0].caractere==tab[i-1][taille-2].caractere||tab[i][0].caractere==tab[i+1][taille-2].caractere||tab[i][0].caractere==tab[i-1][1].caractere||tab[i][0].caractere==tab[i+1][1].caractere||tab[i][0].caractere==tab[i][2].caractere){            //cas 2
+                            return 0;
+                        }
+                    }
+                    if(tab[i][0].caractere==tab[i][1].caractere){                   
+                        if(tab[i][0].caractere==tab[i][taille-2].caractere||tab[i][0].caractere==tab[i-1][taille-1].caractere||tab[i][0].caractere==tab[i+1][taille-1].caractere||tab[i][0].caractere==tab[i-1][2].caractere||tab[i][0].caractere==tab[i+1][2].caractere||tab[i][0].caractere==tab[i][3].caractere){    //cas 3
+                            return 0;
+                        }
+                    }
+                }
+            }
+            if(j==taille-2){      //pour les doubles sur la droite
+                if(i>=1&&i<=taille-2){
+                    if(tab[i][taille-2].caractere==tab[i][taille-1].caractere){            
+                        if(tab[i][taille-2].caractere==tab[i][taille-4].caractere||tab[i][taille-2].caractere==tab[i-1][taille-3].caractere||tab[i][taille-2].caractere==tab[i+1][taille-3].caractere||tab[i][taille-2].caractere==tab[i-1][0].caractere||tab[i][taille-2].caractere==tab[i+1][0].caractere||tab[i][taille-2].caractere==tab[i][1].caractere){            //cas 4
+                            return 0;
+                        }
+                    }
+                }
+            }
+            //les quatres cotées du tableau pour alignement de deux en ligne
+            
+            
+            if(i==0&&j==0){                                     //cas 5
+                if(tab[0][0].caractere==tab[0][1].caractere){            
+                    if(tab[0][0].caractere==tab[0][taille-2].caractere||tab[0][0].caractere==tab[taille-1][taille-1].caractere||tab[0][0].caractere==tab[1][taille-1].caractere||tab[0][0].caractere==tab[0][3].caractere||tab[0][0].caractere==tab[1][2].caractere||tab[0][0].caractere==tab[taille-1][2].caractere){    
+                        return 0;
+                    }
+                }    
+            }
+            
+            if(i==taille-1&&j==0){  //cas 6
+                if(tab[taille-1][0].caractere==tab[taille-1][1].caractere){            
+                    if(tab[taille-1][0].caractere==tab[taille-1][taille-2].caractere||tab[taille-1][0].caractere==tab[taille-2][taille-1].caractere||tab[taille-1][0].caractere==tab[0][taille-1].caractere||tab[taille-1][0].caractere==tab[taille-1][3].caractere||tab[taille-1][0].caractere==tab[taille-2][2].caractere||tab[taille-1][0].caractere==tab[0][2].caractere){    
+                        return 0;
+                    }
+                }    
+            }
+            
+            if(i==0&&j==taille-2){                                     //cas 7
+                if(tab[0][taille-2].caractere==tab[0][taille-1].caractere){            
+                    if(tab[0][taille-2].caractere==tab[0][taille-4].caractere||tab[0][taille-2].caractere==tab[taille-1][taille-3].caractere||tab[0][taille-2].caractere==tab[1][taille-3].caractere||tab[0][taille-2].caractere==tab[0][1].caractere||tab[0][taille-2].caractere==tab[1][0].caractere||tab[0][taille-2].caractere==tab[taille-1][0].caractere){        
+                        return 0;
+                    }
+                }    
+            }
+            
+            if(i==taille-1&&j==taille-2){                                       //cas 8
+                if(tab[taille-1][taille-2].caractere==tab[taille-1][taille-1].caractere){            
+                    if(tab[taille-1][taille-2].caractere==tab[0][0].caractere||tab[taille-1][taille-2].caractere==tab[taille-2][0].caractere||tab[taille-1][taille-2].caractere==tab[taille-1][1].caractere||tab[taille-1][taille-2].caractere==tab[taille-1][taille-4].caractere||tab[taille-1][taille-2].caractere==tab[taille-2][taille-3].caractere||tab[taille-1][taille-2].caractere==tab[0][taille-3].caractere){    
+                        return 0;
+                    }
+                }
+            
+            }
+            //cas pour le haut et le bas
+            if(i==taille-1&&j==taille-1){           //cas 9      
+                if(tab[taille-1][taille-1].caractere==tab[taille-1][0].caractere){            
+                    if(tab[taille-1][taille-1].caractere==tab[taille-1][taille-3].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][taille-2].caractere||tab[taille-1][taille-1].caractere==tab[0][taille-2].caractere||tab[taille-1][taille-1].caractere==tab[taille-1][2].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][1].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][1].caractere){ 
+                        return 0;
+                    } 
+                }
+            }
+            
+            if(i==0&&j==taille-1){           //cas 10      
+                if(tab[0][0].caractere==tab[0][taille-1].caractere){            
+                    if(tab[0][0].caractere==tab[0][taille-3].caractere||tab[0][0].caractere==tab[1][taille-2].caractere||tab[0][0].caractere==tab[taille-1][taille-2].caractere||tab[0][0].caractere==tab[0][2].caractere||tab[0][0].caractere==tab[taille-1][1].caractere||tab[0][0].caractere==tab[1][1].caractere){ 
+                        return 0;
+                    } 
+                }
+            }
+            
+            
+            
+                    //suite à faire pour les colonnes
+            
+            
+            if((tab[i][j].caractere==tab[i+1][j].caractere)&&(j>=1&&j<=taille-2&&i>=2&&i<=taille-4)){
+                if(tab[i][j].caractere==tab[i-2][j].caractere||tab[i][j].caractere==tab[i-1][j-1].caractere||tab[i][j].caractere==tab[i-1][j+1].caractere||tab[i][j].caractere==tab[i+2][j-1].caractere||tab[i][j].caractere==tab[i+2][j+1].caractere||tab[i][j].caractere==tab[i+3][j].caractere){   //condition  pour le cas 11
+                    return 0;
+                }
+            }
+
+        
+                    
+            if(i==0){           //pour les doubles et simples sur la gauche         
+                if(j>=1&&j<=taille-2){
+                    if(tab[0][j].caractere==tab[taille-1][j].caractere){            
+                        if(tab[0][j].caractere==tab[taille-3][j].caractere||tab[0][j].caractere==tab[taille-2][j-1].caractere||tab[0][j].caractere==tab[taille-2][j+1].caractere||tab[0][j].caractere==tab[1][j-1].caractere||tab[0][j].caractere==tab[1][j+1].caractere||tab[0][j].caractere==tab[2][j].caractere){            //cas 12
+                            return 0;
+                        } 
+                    }
+                    if(tab[0][j].caractere==tab[1][j].caractere){                   
+                        if(tab[0][j].caractere==tab[taille-2][j].caractere||tab[0][j].caractere==tab[taille-1][j-1].caractere||tab[0][j].caractere==tab[taille-1][j+1].caractere||tab[0][j].caractere==tab[2][j-1].caractere||tab[0][j].caractere==tab[2][j+1].caractere||tab[0][j].caractere==tab[3][j].caractere){    //cas 13
+                            return 0;
+                        }
+                    }
+                }
+            }
+            if(i==taille-2){                        //cas 14 
+                if(j>=1&&j<=taille-2){
+                    if(tab[taille-2][j].caractere==tab[taille-1][j].caractere){            
+                        if(tab[taille-2][j].caractere==tab[taille-4][j].caractere||tab[taille-2][j].caractere==tab[taille-3][j-1].caractere||tab[taille-2][j].caractere==tab[taille-3][j+1].caractere||tab[taille-2][j].caractere==tab[0][j-1].caractere||tab[taille-2][j].caractere==tab[0][j+1].caractere||tab[taille-2][j].caractere==tab[1][j].caractere){
+                            return 0;
+                        }
+                    }
+                }
+            }
+            if(i==0&&j==0){                             //cas 15
+                if(tab[0][0].caractere==tab[1][0].caractere){            
+                    if(tab[0][0].caractere==tab[taille-2][0].caractere||tab[0][0].caractere==tab[taille-1][1].caractere||tab[0][0].caractere==tab[taille-1][taille-1].caractere||tab[0][0].caractere==tab[3][0].caractere||tab[0][0].caractere==tab[2][1].caractere||tab[0][0].caractere==tab[2][taille-1].caractere){    
+                        return 0;
+                    }
+                }
+            }
+            
+            
+            if(i==0&&j==taille-1){                  //cas 16
+                if(tab[0][taille-1].caractere==tab[1][taille-1].caractere){            
+                    if(tab[0][taille-1].caractere==tab[taille-2][taille-1].caractere||tab[0][taille-1].caractere==tab[taille-1][taille-2].caractere||tab[0][taille-1].caractere==tab[taille-1][0].caractere||tab[0][taille-1].caractere==tab[3][taille-1].caractere||tab[0][taille-1].caractere==tab[2][taille-2].caractere||tab[0][taille-1].caractere==tab[2][0].caractere){            
+                        return 0;
+                    }
+                }
+            }
+            
+            
+            if(i==taille-2&&j==0){                  
+                if(tab[taille-2][0].caractere==tab[taille-1][0].caractere){            //cas 17
+                    if(tab[taille-2][0].caractere==tab[taille-4][0].caractere||tab[taille-2][0].caractere==tab[taille-3][1].caractere||tab[taille-2][0].caractere==tab[taille-3][taille-1].caractere||tab[taille-2][0].caractere==tab[0][1].caractere||tab[taille-2][0].caractere==tab[0][taille-1].caractere||tab[taille-2][0].caractere==tab[1][0].caractere){   
+                        return 0;
+                    }
+                }
+            }
+            
+            if(i==taille-2&&j==taille-1){                  
+                if(tab[taille-2][taille-1].caractere==tab[taille-1][taille-1].caractere){          //cas 18  
+                    if(tab[taille-2][taille-1].caractere==tab[taille-4][taille-1].caractere||tab[taille-2][taille-1].caractere==tab[taille-3][taille-2].caractere||tab[taille-2][taille-1].caractere==tab[taille-3][0].caractere||tab[taille-2][taille-1].caractere==tab[0][0].caractere||tab[taille-2][taille-1].caractere==tab[0][taille-2].caractere||tab[taille-2][taille-1].caractere==tab[1][taille-1].caractere){  
+                        return 0;
+                    }
+                }
+            }
+            
+            if(i==taille-1&&j==taille-1){                  
+                if(tab[taille-1][taille-1].caractere==tab[0][taille-1].caractere){        //cas 19    
+                    if(tab[taille-1][taille-1].caractere==tab[taille-3][taille-1].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][taille-2].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][0].caractere||tab[taille-1][taille-1].caractere==tab[1][0].caractere||tab[taille-1][taille-1].caractere==tab[1][taille-2].caractere||tab[taille-1][taille-1].caractere==tab[2][taille-1].caractere){         
+                        return 0;
+                    }
+                }
+            }
+            
+            if(i==0&&j==0){                  
+                if(tab[0][0].caractere==tab[taille-1][0].caractere){     //cas 20       
+                    if(tab[0][0].caractere==tab[taille-3][0].caractere||tab[0][0].caractere==tab[taille-2][taille-1].caractere||tab[0][0].caractere==tab[taille-2][1].caractere||tab[0][0].caractere==tab[1][1].caractere||tab[0][0].caractere==tab[1][taille-1].caractere||tab[0][0].caractere==tab[2][0].caractere){   
+                        return 0;
+                    }
+                }
+            }
+            
+        }
+    }
+    return 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
 
 void definition_parametres() {
   int taille, different;
+  bool verifblocage;
   
-  do {
+    do {
         printf("Entrez la taille du tableau (entre 5 et 20) : ");
         scanf("%d", &taille);
     } while (taille < 5 || taille > 20);
@@ -643,13 +825,24 @@ void definition_parametres() {
         tab[i][k].variable = 0; // variable à zéro pour le compteur
       }
     }
+    Affichage(tab, taille);        //début du jeu
     remplacement(tab, taille,different);
-  Affichage(tab, taille);
-  echange(tab,taille);
-  Affichage(tab, taille);
+    do{                                     //boucle de verifblocage
+                //netoyage de la zone de jeu
+    //clrscr();                                       //nettoyage du terminal
+    Affichage(tab, taille);        
+    echange(tab,taille);            //échange
+    remplacement(tab, taille,different);
+    verifblocage=détectionblocage(tab,taille);
+    //clrscr();    //netoyage du terminal
+    }while(verifblocage==0);
+    Affichage(tab, taille);
+    printf("c'est terminé plus aucun mouvement n'est possible");
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 void Ecran_titre(){
@@ -736,3 +929,17 @@ int main() {
 
 return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
