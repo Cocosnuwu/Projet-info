@@ -328,7 +328,7 @@ void DeplacerGauche(case_tableau tab[][20],int taille) {
 }
 
 
-int remplacement(case_tableau tab[][20],int taille,int different,int high_score){
+int remplacement(case_tableau tab[][20],int taille,int different,int score){
     int i, j, k;
     bool vérif=0;
     bool vériftot;
@@ -348,13 +348,13 @@ int remplacement(case_tableau tab[][20],int taille,int different,int high_score)
                     vérif=1;
                     tab[i][k].caractere='A'+rand()%different; //  symboles différents choisi par l'utilisateur
                     tab[i][k].variable=0; // variable à zero pour le compteur
-                    high_score++;
+                    score++;
                 }
             }
         }
         
     }while(vérif==1 || vériftot==1);    //le do while ici sert pour ne pas sortir de la boucle tant que un des deux booléens est égale à 1
-    return high_score;
+    return score;
 }
 void echange(case_tableau tab[][20],int taille){
   int a1, b1, a2, b2;    //a1 : ligne de la 1ère case à échanger et b1 : colonne de cette 1ère case
@@ -808,6 +808,7 @@ bool détectionblocage(case_tableau tab[][20],int taille){         //voir annexe
 void definition_parametres() {
   int taille, different;
   bool verifblocage;
+  int score;
   int high_score;
   
   
@@ -834,19 +835,23 @@ void definition_parametres() {
       }
     }
     Affichage(tab, taille);        //début du jeu
-    high_score=remplacement(tab, taille,different,high_score);
-    high_score=0;
+    score=remplacement(tab, taille,different,score);
+    score=0;
+    //high_score à définir avec si aucun fichier de sauvegarde existe alors = 0 sinon = au fichier de sauvegarde
     do{                                     //boucle de verifblocage
-                //netoyage de la zone de jeu
-    //clrscr();                                       //nettoyage du terminal
+                
+    //if(high_score<score){
+    	//high_score=score;
+    //}
+    printf("Votre score est de %d \n",score);                                     
     Affichagemoji(tab, taille);        
     echange(tab,taille);            //échange
-    high_score=remplacement(tab, taille,different,high_score);
+    score=remplacement(tab, taille,different,high_score);
     verifblocage=détectionblocage(tab,taille);
-    //clrscr();    //netoyage du terminal
+    
     }while(verifblocage==0);
     Affichagemoji(tab, taille);
-    printf("c'est terminé plus aucun mouvement n'est possible");
+    printf("c'est terminé plus aucun mouvement n'est possible votre score est de %d",high_score);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
