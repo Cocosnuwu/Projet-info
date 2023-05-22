@@ -104,11 +104,13 @@ void Affichagemoji(case_tableau tab[][20],int taille){ // Affichage du tableau �
                 }
                 printf("\n ");      
             }
+            else{
+            printf(" ");
+            }
             for (l = 0; l < taille; l++) {
                 if (l == taille - 1) {
                     printf("+----+\n"); // Ligne de fin de séparation
-                    break;
-                } 
+                }
                 else {
                 printf("+----"); // Ligne à multiplier de séparation
                 }
@@ -156,7 +158,7 @@ void Affichagemoji(case_tableau tab[][20],int taille){ // Affichage du tableau �
         printf("|"); // Barre de fin
     } 
     printf("\n");
-    
+    printf(" ");
     for (l = 0; l < taille; l++) {
         if (l == taille - 1) {
             printf("+----+\n"); // Ligne de fin de séparation
@@ -326,12 +328,14 @@ void DeplacerGauche(case_tableau tab[][20],int taille) {
 }
 
 
-void remplacement(case_tableau tab[][20],int taille,int different){
+int remplacement(case_tableau tab[][20],int taille,int different,int high_score){
     int i, j, k;
     bool vérif=0;
     bool vériftot;
     int taille2;
     taille2=taille;
+    
+    
     
     
     do{             // remplacement de tout les caractères avec un booléen = 1 
@@ -344,11 +348,13 @@ void remplacement(case_tableau tab[][20],int taille,int different){
                     vérif=1;
                     tab[i][k].caractere='A'+rand()%different; //  symboles différents choisi par l'utilisateur
                     tab[i][k].variable=0; // variable à zero pour le compteur
+                    high_score++;
                 }
             }
         }
         
     }while(vérif==1 || vériftot==1);    //le do while ici sert pour ne pas sortir de la boucle tant que un des deux booléens est égale à 1
+    return high_score;
 }
 void echange(case_tableau tab[][20],int taille){
   int a1, b1, a2, b2;    //a1 : ligne de la 1ère case à échanger et b1 : colonne de cette 1ère case
@@ -802,6 +808,8 @@ bool détectionblocage(case_tableau tab[][20],int taille){         //voir annexe
 void definition_parametres() {
   int taille, different;
   bool verifblocage;
+  int high_score;
+  
   
     do {
         printf("Entrez la taille du tableau (entre 5 et 20) : ");
@@ -826,17 +834,18 @@ void definition_parametres() {
       }
     }
     Affichage(tab, taille);        //début du jeu
-    remplacement(tab, taille,different);
+    high_score=remplacement(tab, taille,different,high_score);
+    high_score=0;
     do{                                     //boucle de verifblocage
                 //netoyage de la zone de jeu
     //clrscr();                                       //nettoyage du terminal
-    Affichage(tab, taille);        
+    Affichagemoji(tab, taille);        
     echange(tab,taille);            //échange
-    remplacement(tab, taille,different);
+    high_score=remplacement(tab, taille,different,high_score);
     verifblocage=détectionblocage(tab,taille);
     //clrscr();    //netoyage du terminal
     }while(verifblocage==0);
-    Affichage(tab, taille);
+    Affichagemoji(tab, taille);
     printf("c'est terminé plus aucun mouvement n'est possible");
 }
 
@@ -929,7 +938,6 @@ int main() {
 
 return 0;
 }
-
 
 
 
