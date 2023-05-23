@@ -4,26 +4,14 @@
 #include <stdlib.h>
 #include <stdbool.h> //pour les booléens
 
-#define S "0"//reSet color
-#define L "1"//add light to the color
-#define D "2"//assombrie les caractère
-#define E "22"//anule les effet L et D
-#define V "31"//rouge car R est déja pris
-#define G "32"//vert 
-#define Y "33"//jaune
-#define B "34"//bleu 
-#define M "35"//magenta
-#define C "36"//cyan
-#define W "37"//blanc
 
-#define PCOLOR(X) "\x1b["X"m"    //macro pour ajouter la couleur facilement, le X est l'emplacement du code couleur, au forma "nombre"
-typedef struct case_tableau {
-    char caractere;
+
+#define COLOR(X) "\x1b["X"m"    //macro pour ajouter la couleur facilement, le X est l'emplacement du code couleur, au forma "nombre"
+typedef struct square_table {
+    char charactere;
     bool variable;
-    int TAILLE;
     int different;
-    int taille;
-} case_tableau;
+} square_table;
 
 
 
@@ -31,14 +19,14 @@ typedef struct case_tableau {
 
 
 
-void Affichage(case_tableau tab[][20], int taille) {
+void Display(square_table tab[][20], int size) {
     int i, j, k, l;
     
-    for (i = 0; i < taille; i++) {
+    for (i = 0; i < size; i++) {
         printf("\n \n");
         
-        for (l = 0; l < taille; l++) {
-            if (l == taille - 1) {
+        for (l = 0; l < size; l++) {
+            if (l == size - 1) {
                 printf("+---+\n"); // Ligne de fin de séparation
                 break;
             } else {
@@ -46,35 +34,35 @@ void Affichage(case_tableau tab[][20], int taille) {
             }
         }
         
-        for (k = 0; k < taille; k++) {
+        for (k = 0; k < size; k++) {
             if (tab[i][k].variable == 1) {
                 printf("|");
                 printf("\x1b[31m O ");
-                printf(PCOLOR("%d"), 0);
-            } else if (tab[i][k].caractere == 'A') {
+                printf(COLOR("%d"), 0);
+            } else if (tab[i][k].charactere == 'A') {
                 printf("|");
                 printf("\x1b[32m A ");
-                printf(PCOLOR("%d"), 0);
-            } else if (tab[i][k].caractere == 'B') {
+                printf(COLOR("%d"), 0);
+            } else if (tab[i][k].charactere == 'B') {
                 printf("|");
                 printf("\x1b[33m B ");
-                printf(PCOLOR("%d"), 0);
-            } else if (tab[i][k].caractere == 'C') {
+                printf(COLOR("%d"), 0);
+            } else if (tab[i][k].charactere == 'C') {
                 printf("|");
                 printf("\x1b[34m C ");
-                printf(PCOLOR("%d"), 0);
-            } else if (tab[i][k].caractere == 'D') {
+                printf(COLOR("%d"), 0);
+            } else if (tab[i][k].charactere == 'D') {
                 printf("|");
                 printf("\x1b[35m D ");
-                printf(PCOLOR("%d"), 0);
-            } else if (tab[i][k].caractere == 'E') {
+                printf(COLOR("%d"), 0);
+            } else if (tab[i][k].charactere == 'E') {
                 printf("|");
                 printf("\x1b[36m E ");
-                printf(PCOLOR("%d"), 0);
-            } else if (tab[i][k].caractere == 'F') {
+                printf(COLOR("%d"), 0);
+            } else if (tab[i][k].charactere == 'F') {
                 printf("|");
                 printf("\x1b[37m F ");
-                printf(PCOLOR("%d"), 0);
+                printf(COLOR("%d"), 0);
             }
         }
         printf("|"); // Barre de fin
@@ -82,8 +70,8 @@ void Affichage(case_tableau tab[][20], int taille) {
     
     printf("\n");
     
-    for (l = 0; l < taille; l++) {
-        if (l == taille - 1) {
+    for (l = 0; l < size; l++) {
+        if (l == size - 1) {
             printf("+---+\n"); // Ligne de fin de séparation
         } 
         else {
@@ -94,12 +82,12 @@ void Affichage(case_tableau tab[][20], int taille) {
 
 
 
-void Affichagemoji(case_tableau tab[][20],int taille){ // Affichage du tableau à modifier pendant la séance d'info
+void Displaymoji(square_table tab[][20],int size){ // Display du table à modifier pendant la séance d'info
     int i,j,k,l,m;
-        for(i=0;i<taille;i++){
+        for(i=0;i<size;i++){
             printf("\n \n");
             if(i==0){
-                for(m=0;m<taille;m++){        //affichage des chiffres en hauteur
+                for(m=0;m<size;m++){        //Display des chiffres en hauteur
                     printf("   %d.",m);
                 }
                 printf("\n ");      
@@ -107,60 +95,60 @@ void Affichagemoji(case_tableau tab[][20],int taille){ // Affichage du tableau �
             else{
             printf(" ");
             }
-            for (l = 0; l < taille; l++) {
-                if (l == taille - 1) {
+            for (l = 0; l < size; l++) {
+                if (l == size - 1) {
                     printf("+----+\n"); // Ligne de fin de séparation
                 }
                 else {
                 printf("+----"); // Ligne à multiplier de séparation
                 }
             }
-                for(k=0;k<taille;k++){
+                for(k=0;k<size;k++){
                     if(k==0){
                 printf("%d",i);   
             }
             if(tab[i][k].variable==1){
                 printf("|");
                 printf("\x1b[31m O ");
-                printf(PCOLOR("%d"),0);
+                printf(COLOR("%d"),0);
                 
             }
-            else if(tab[i][k].caractere=='A'){
+            else if(tab[i][k].charactere=='A'){
                 printf("|");
                 printf(" 🍐 ");
                 
             }
-            else if(tab[i][k].caractere=='B'){
+            else if(tab[i][k].charactere=='B'){
                 printf("|");
                 printf(" 🍉 ");
             }
-            else if(tab[i][k].caractere=='C'){
+            else if(tab[i][k].charactere=='C'){
                 printf("|");
                 printf(" 🥝 ");
                 
             }
-            else if(tab[i][k].caractere=='D'){
+            else if(tab[i][k].charactere=='D'){
                 printf("|");
                 printf(" 🍇 ");
                 
             }
-            else if(tab[i][k].caractere=='E'){
+            else if(tab[i][k].charactere=='E'){
                 printf("|");
                 printf(" 🧁 ");
-                printf(PCOLOR("%d"),0);
+                printf(COLOR("%d"),0);
             }
-            else if(tab[i][k].caractere=='F'){
+            else if(tab[i][k].charactere=='F'){
                 printf("|");
                 printf(" 🥕 ");
-                printf(PCOLOR("%d"),0);
+                printf(COLOR("%d"),0);
             }
         }
         printf("|"); // Barre de fin
     } 
     printf("\n");
     printf(" ");
-    for (l = 0; l < taille; l++) {
-        if (l == taille - 1) {
+    for (l = 0; l < size; l++) {
+        if (l == size - 1) {
             printf("+----+\n"); // Ligne de fin de séparation
         } 
         else{
@@ -169,152 +157,152 @@ void Affichagemoji(case_tableau tab[][20],int taille){ // Affichage du tableau �
     }
 }
 
-bool detecteMarque(case_tableau tab[][20],int taille,bool veriftot) {
+bool detect_mark(square_table tab[][20],int size,bool verif_quick) {
     int ol, oc; // optimisation fin du k en ligne et colonne
     bool verif = 0;
-    veriftot = 0; // booléen pour vérifier qu'il ne reste aucune ligne ou colonne de 3 ou plus
+    verif_quick = 0; // booléen pour vérifier qu'il ne reste aucune ligne ou colonne de 3 ou plus
     int i, j, k, l, m, o;
     
-    for (int i = 0; i < taille; i++) {
-        ol=taille;
+    for (int i = 0; i < size; i++) {
+        ol=size;
         for (int j = 0; j < ol; j++) {
             if(j==0){
-                oc=taille;
-                int compteur = 1; // initialisation des compteurs à 1
-                int compteurinf=1;
-                while (compteur < taille && tab[i][compteur].caractere == tab[i][j].caractere) {
-                compteur++; // compter le nombre d'éléments égaux vers la droite
+                oc=size;
+                int counter = 1; // initialisation des counters à 1
+                int counterlow=1;
+                while (counter < size && tab[i][counter].charactere == tab[i][j].charactere) {
+                counter++; // compter le nombre d'éléments égaux vers la droite
                 }
-                while (taille-compteurinf >=0 && tab[i][taille - compteurinf].caractere == tab[i][0].caractere) {
-                compteurinf++; // compter le nombre d'éléments égaux vers la droite
+                while (size-counterlow >=0 && tab[i][size - counterlow].charactere == tab[i][0].charactere) {
+                counterlow++; // compter le nombre d'éléments égaux vers la droite
                 }
-                if (compteur >= 3&&compteurinf<=1) { // si on a trouvé une série d'au moins 3 éléments égaux
-                    for (int k = 0; k < compteur; k++) {
+                if (counter >= 3&&counterlow<=1) { // si on a trouvé une série d'au moins 3 éléments égaux
+                    for (int k = 0; k < counter; k++) {
                         tab[i][k].variable=1; // remplacer les éléments par des "O"
                     }
-                    veriftot=1;
+                    verif_quick=1;
                 }
-                if ((compteurinf >= 3&&compteur<=1)){
+                if ((counterlow >= 3&&counter<=1)){
                     tab[i][0].variable=1; // remplacer du premier éléments par un "O"
-                    for (int k = taille+1-compteurinf; k < taille ; k++) {
+                    for (int k = size+1-counterlow; k < size ; k++) {
                         tab[i][k].variable=1; // remplacer les éléments par des "O"
                     }
-                    ol=taille-compteurinf; //optimisation fin de ligne
-                    veriftot=1;
+                    ol=size-counterlow; //optimisation fin de ligne
+                    verif_quick=1;
                 }
-                if (compteurinf+compteur>=4&&compteur>=1&&compteurinf>=1){
-                    for (int k = 0; k < compteur; k++) {
+                if (counterlow+counter>=4&&counter>=1&&counterlow>=1){
+                    for (int k = 0; k < counter; k++) {
                         tab[i][k].variable=1; // remplacer les éléments par des "O"
                     }
-                    for (int k = taille + 1 - compteurinf; k<taille ; k++) {
+                    for (int k = size + 1 - counterlow; k<size ; k++) {
                         tab[i][k].variable=1; // remplacer les éléments par des "O"
                     }
-                    ol=taille-compteurinf; //optimisation fin de ligne
-                    veriftot=1;
+                    ol=size-counterlow; //optimisation fin de ligne
+                    verif_quick=1;
                 }
             }
             if(i==0){
-                int compteur = 1; // réinitialisation des compteurs à 1
-                int compteurinf=1; 
-                while (taille-compteurinf >=0 && tab[taille - compteurinf][j].caractere == tab[i][j].caractere) {
-                compteurinf++; // compter le nombre d'éléments égaux vers la droite
+                int counter = 1; // réinitialisation des counters à 1
+                int counterlow=1; 
+                while (size-counterlow >=0 && tab[size - counterlow][j].charactere == tab[i][j].charactere) {
+                counterlow++; // compter le nombre d'éléments égaux vers la droite
                 }
-                while (compteur < taille && tab[i + compteur][j].caractere == tab[i][j].caractere) {
-                    compteur++; // compter le nombre d'éléments égaux vers le bas
+                while (counter < size && tab[i + counter][j].charactere == tab[i][j].charactere) {
+                    counter++; // compter le nombre d'éléments égaux vers le bas
                 }
-                if (compteur >= 3&&compteurinf==1) { // si on a trouvé une série d'au moins 3 éléments égaux
-                    for (int k = 0; k < compteur; k++) {
+                if (counter >= 3&&counterlow==1) { // si on a trouvé une série d'au moins 3 éléments égaux
+                    for (int k = 0; k < counter; k++) {
                         tab[k][j].variable=1; // remplacer les éléments par des "O"
-                        veriftot=1;
+                        verif_quick=1;
                         
                     }
                 }
-                if (compteurinf >= 3&&compteur==1){
+                if (counterlow >= 3&&counter==1){
                     tab[0][j].variable=1; // remplacer du premier éléments par un "O"
-                    for (int k = taille+1-compteurinf; k <taille ; k++) {
+                    for (int k = size+1-counterlow; k <size ; k++) {
                         tab[k][j].variable=1; // remplacer les éléments par des "O"
-                        veriftot=1;
+                        verif_quick=1;
                         
                     }
-                oc=taille-compteurinf;
+                oc=size-counterlow;
                 }
-                if (compteurinf+compteur>=4&&compteur!=1&&compteurinf!=1){
-                    for (int k = 0; k < compteur; k++) {
+                if (counterlow+counter>=4&&counter!=1&&counterlow!=1){
+                    for (int k = 0; k < counter; k++) {
                         tab[k][j].variable=1; // remplacer les éléments par des "O"
                     }
-                    for (int k = taille+1 -compteurinf; k < taille; k++) {
+                    for (int k = size+1 -counterlow; k < size; k++) {
                         tab[k][j].variable=1; // remplacer les éléments par des "O"
                        
                     }
-                oc=taille-compteurinf; //optimisation fin de ligne
-                veriftot=1;
+                oc=size-counterlow; //optimisation fin de ligne
+                verif_quick=1;
                 }
             }
-            int compteur = 1; // initialisation du compteur à 1
-            while (j + compteur < taille && tab[i][j + compteur].caractere == tab[i][j].caractere) {
-                compteur++; // compter le nombre d'éléments égaux vers la droite
+            int counter = 1; // initialisation du counter à 1
+            while (j + counter < size && tab[i][j + counter].charactere == tab[i][j].charactere) {
+                counter++; // compter le nombre d'éléments égaux vers la droite
             }
-            if (compteur >= 3) { // si on a trouvé une série d'au moins 3 éléments égaux
-                for (int k = 0; k < compteur; k++) {
+            if (counter >= 3) { // si on a trouvé une série d'au moins 3 éléments égaux
+                for (int k = 0; k < counter; k++) {
                     tab[i][j+k].variable=1; // remplacer les éléments par des "O"
                 }
             }
-            compteur = 1; // réinitialisation du compteur à 1
-            while (i + compteur < taille && tab[i + compteur][j].caractere == tab[i][j].caractere) {
-                compteur++; // compter le nombre d'éléments égaux vers le bas
+            counter = 1; // réinitialisation du counter à 1
+            while (i + counter < size && tab[i + counter][j].charactere == tab[i][j].charactere) {
+                counter++; // compter le nombre d'éléments égaux vers le bas
             }
-            if (compteur >= 3) { // si on a trouvé une série d'au moins 3 éléments égaux
-                for (int k = 0; k < compteur; k++) {
+            if (counter >= 3) { // si on a trouvé une série d'au moins 3 éléments égaux
+                for (int k = 0; k < counter; k++) {
                     tab[i+k][j].variable=1; // remplacer les éléments par des "O"
                 }
             }
         
         
         
-            for (int j = 0; j < taille; j++) {
-                int compteur = 1; // initialisation du compteur à 1
-                while (j + compteur < taille && tab[i][j + compteur].caractere == tab[i][j].caractere) {
-                    compteur++; // compter le nombre d'éléments égaux vers la droite
+            for (int j = 0; j < size; j++) {
+                int counter = 1; // initialisation du counter à 1
+                while (j + counter < size && tab[i][j + counter].charactere == tab[i][j].charactere) {
+                    counter++; // compter le nombre d'éléments égaux vers la droite
                 }
-                if (compteur >= 3) { // si on a trouvé une série d'au moins 3 éléments égaux
-                    for (int k = 0; k < compteur; k++) {
+                if (counter >= 3) { // si on a trouvé une série d'au moins 3 éléments égaux
+                    for (int k = 0; k < counter; k++) {
                         tab[i][j+k].variable=1; // remplacer les éléments par des "O"
                     }
-                    veriftot=1;
+                    verif_quick=1;
                 }
-                compteur = 1; // réinitialisation du compteur à 1
-                while (i + compteur < taille && tab[i + compteur][j].caractere == tab[i][j].caractere) {
-                    compteur++; // compter le nombre d'éléments égaux vers le bas
+                counter = 1; // réinitialisation du counter à 1
+                while (i + counter < size && tab[i + counter][j].charactere == tab[i][j].charactere) {
+                    counter++; // compter le nombre d'éléments égaux vers le bas
                 }
-                if (compteur >= 3) { // si on a trouvé une série d'au moins 3 éléments égaux
-                    for (int k = 0; k < compteur; k++) {
+                if (counter >= 3) { // si on a trouvé une série d'au moins 3 éléments égaux
+                    for (int k = 0; k < counter; k++) {
                         tab[i+k][j].variable=1; // remplacer les éléments par des "O"
                     }
-                    veriftot=1;
+                    verif_quick=1;
                 }
             }
         }        
     }
-    return veriftot;
+    return verif_quick;
 }
 
-void DeplacerGauche(case_tableau tab[][20],int taille) {
+void move_left(square_table tab[][20],int size) {
     int i,j,k;
     bool verif=0;
     
     
     
-    for (i = 0; i < taille; i++) {
-        for (j = 0; j < taille; j++) {
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
             if (tab[i][j].variable == 1) {
                 k = j;
                 while (k > 0 && tab[i][k - 1].variable == 0) {
                     // Échanger le caractère (avec son booléen précédent!!!!)
-                    char tempCaractere = tab[i][k - 1].caractere;
+                    char tempcharactere = tab[i][k - 1].charactere;
                     int tempVariable = tab[i][k - 1].variable;
-                    tab[i][k - 1].caractere = tab[i][k].caractere;
+                    tab[i][k - 1].charactere = tab[i][k].charactere;
                     tab[i][k - 1].variable = tab[i][k].variable;
-                    tab[i][k].caractere = tempCaractere;
+                    tab[i][k].charactere = tempcharactere;
                     tab[i][k].variable = tempVariable;
                     k--;
                 }
@@ -328,36 +316,36 @@ void DeplacerGauche(case_tableau tab[][20],int taille) {
 }
 
 
-double remplacement(case_tableau tab[][20],int taille,int different,long score){
+double replacement(square_table tab[][20],int size,int different,long score){
     int i, j, k;
     bool verif=0;
-    bool veriftot;
-    int taille2;
-    taille2=taille;
+    bool verif_quick;
+    int size2;
+    size2=size;
     
     
     
     
-    do{             // remplacement de tout les caractères avec un booléen = 1 
-        veriftot=detecteMarque(tab,taille2,veriftot); // vériftot ici sert à détecter si le programme detecteMarque change une variable d'un caractère 
-        DeplacerGauche(tab,taille2);
-        for(i=0;i<taille;i++){
+    do{             // replacement de tout les caractères avec un booléen = 1 
+        verif_quick=detect_mark(tab,size2,verif_quick); // vériftot ici sert à détecter si le programme detect_mark change une variable d'un caractère 
+        move_left(tab,size2);
+        for(i=0;i<size;i++){
             verif=0;
-            for(k=0;k<taille;k++){ // Génération aléatoire des caractères
+            for(k=0;k<size;k++){ // Génération aléatoire des caractères
                 if(tab[i][k].variable==1){
                     verif=1;
-                    tab[i][k].caractere='A'+rand()%different; //  symboles différents choisi par l'utilisateur
-                    tab[i][k].variable=0; // variable à zero pour le compteur
+                    tab[i][k].charactere='A'+rand()%different; //  symboles différents choisi par l'utilisateur
+                    tab[i][k].variable=0; // variable à zero pour le counter
                     score++;
                 }
             }
         }
         
-    }while(verif==1 || veriftot==1);    //le do while ici sert pour ne pas sortir de la boucle tant que un des deux booléens est égale à 1
+    }while(verif==1 || verif_quick==1);    //le do while ici sert pour ne pas sortir de la boucle tant que un des deux booléens est égale à 1
     return score;
 }
-void echange(case_tableau tab[][20],int taille){
-  int a1, b1, a2, b2;    //a1 : ligne de la 1ère case à échanger et b1 : colonne de cette 1ère case
+void exchange(square_table tab[][20],int size){
+  int a1, b1, a2, b2;    //a1 : ligne de la 1ère square à échanger et b1 : colonne de cette 1ère square
                          // pareil pour a2 et b2
   a1=0;
   b1=0;
@@ -365,78 +353,78 @@ void echange(case_tableau tab[][20],int taille){
   b2=0;
   int temp;
   int i, k;
-  case_tableau tabcopie[20][20]; 
-  bool veriftot;
-  veriftot=0;
-    for (i = 0; i < taille; i++) {
-        for (k = 0; k < taille; k++) {
-        tabcopie[i][k].caractere = tab[i][k].caractere;
+  square_table tabcopie[20][20]; 
+  bool verif_quick;
+  verif_quick=0;
+    for (i = 0; i < size; i++) {
+        for (k = 0; k < size; k++) {
+        tabcopie[i][k].charactere = tab[i][k].charactere;
         tabcopie[i][k].variable = tab[i][k].variable;
         }
     }
   
   //boucle pour recommencer après chaque échange  
   int erreur=0; 
-    char case1, case2;
+    char square1, square2;
 do{
     
     do{  //pour vérifier l'inverse : on veut que les a et b soient compris entre 0 et _ inclus
-      printf("\nDonnez les coordonnées de la 1ère case : ligne, puis colonne\n"); 
+      printf("\nDonnez les coordonnées de la 1ère square : ligne, puis colonne\n"); 
       scanf("%d",&a1);
       scanf("%d",&b1);
-    }while (a1<0 || a1>=taille || b1<0 || b1>=taille );
-    case1=tabcopie[a1][b1].caractere;
+    }while (a1<0 || a1>=size || b1<0 || b1>=size );
+    square1=tabcopie[a1][b1].charactere;
     
-    printf("case1: ");
-    if(case1=='A'){
+    printf("square1: ");
+    if(square1=='A'){
       printf(" 🍐 \n");
     }
-    else if(case1=='B'){
+    else if(square1=='B'){
       printf(" 🍉 \n");
     }
-    else if(case1=='C'){
+    else if(square1=='C'){
       printf(" 🥝 \n");
     }
-    else if(case1=='D'){
+    else if(square1=='D'){
       printf(" 🍇 \n");               
     }
-    else if(case1=='E'){
+    else if(square1=='E'){
       printf(" 🧁 \n");
-      //printf(PCOLOR("%d"),0);
+      //printf(COLOR("%d"),0);
     }
-    else if(case1=='F'){
+    else if(square1=='F'){
       printf(" 🥕 \n");
-      //printf(PCOLOR("%d"),0);
+      //printf(COLOR("%d"),0);
     }
 
 
     do{
-      printf("Donnez les coordonnées de la 2nd case : ligne, puis colonne\n");
+      printf("Donnez les coordonnées de la 2nd square : ligne, puis colonne\n");
       scanf("%d",&a2);
       scanf("%d",&b2);
-    }while (a2<0 || a2>=taille || b2<0 || b2>=taille);
-    case2=tabcopie[a2][b2].caractere;
+    }while (a2<0 || a2>=size || b2<0 || b2>=size);
+    square2=tabcopie[a2][b2].charactere;
 
-    printf("case2: ");
-    if(case2=='A'){
+    printf("square2: ");
+    if(square2=='A'){
       printf(" 🍐 \n");
     }
-    else if(case2=='B'){
+    else if(square2=='B'){
       printf(" 🍉 \n");
     }
-    else if(case2=='C'){
+    else if(square2=='C'){
       printf(" 🥝 \n");
     }
-    else if(case2=='D'){
+    else if(square2=='D'){
       printf(" 🍇 \n");               
     }
-    else if(case2=='E'){
+    else if(square2=='E'){
       printf(" 🧁 \n");
-      //printf(PCOLOR("%d"),0);
+      //printf(COLOR("%d"),0);
     }
-    else if(case2=='F'){
+    else if(square2=='F'){
       printf(" 🥕 \n");
-      //printf(PCOLOR("%d"),0);
+      //printf(COLOR("%d"),0);
     }
 
 
@@ -444,59 +432,59 @@ do{
 
 
     
-  if (((a1==a2)&&((b1==b2+1)||(b1==b2-1))) || ((b1==b2)&&((a1==a2+1)||(a1==a2-1)))){  //condition pour vérifier que les cases soient à côtés ou au-dessus/dessous
+  if (((a1==a2)&&((b1==b2+1)||(b1==b2-1))) || ((b1==b2)&&((a1==a2+1)||(a1==a2-1)))){  //condition pour vérifier que les squares soient à côtés ou au-dessus/dessous
     printf("condition ok\n");
-    case1=tabcopie[a2][b2].caractere;    //échange de la case1 par la case2
-    case2=tabcopie[a1][b1].caractere;    //pareil mais pour case2 par case1
-    temp=tabcopie[a1][b1].caractere;
-    tabcopie[a1][b1].caractere=tabcopie[a2][b2].caractere;
-    tabcopie[a2][b2].caractere=temp;
-    veriftot=detecteMarque(tabcopie, taille, veriftot);
+    square1=tabcopie[a2][b2].charactere;    //échange de la square1 par la square2
+    square2=tabcopie[a1][b1].charactere;    //pareil mais pour square2 par square1
+    temp=tabcopie[a1][b1].charactere;
+    tabcopie[a1][b1].charactere=tabcopie[a2][b2].charactere;
+    tabcopie[a2][b2].charactere=temp;
+    verif_quick=detect_mark(tabcopie, size, verif_quick);
 
-    if(veriftot==1){
-      printf("case1 échangée: ");
-        if(case1=='A'){
+    if(verif_quick==1){
+      printf("square1 échangée: ");
+        if(square1=='A'){
           printf(" 🍐 \n");
         }
-        else if(case1=='B'){
+        else if(square1=='B'){
           printf(" 🍉 \n");
         }
-        else if(case1=='C'){
+        else if(square1=='C'){
           printf(" 🥝 \n");
         }
-        else if(case1=='D'){
+        else if(square1=='D'){
           printf(" 🍇 \n");               
         }
-        else if(case1=='E'){
+        else if(square1=='E'){
           printf(" 🧁 \n");
-          //printf(PCOLOR("%d"),0);
+          
         }
-        else if(case1=='F'){
+        else if(square1=='F'){
           printf(" 🥕 \n");
-          //printf(PCOLOR("%d"),0);
+         
       }
     
 
-      printf("case2 échangée: ");
-        if(case2=='A'){
+      printf("square2 échangée: ");
+        if(square2=='A'){
           printf(" 🍐 \n");
         }
-        else if(case2=='B'){
+        else if(square2=='B'){
           printf(" 🍉 \n");
         }
-        else if(case2=='C'){
+        else if(square2=='C'){
           printf(" 🥝 \n");
         }
-        else if(case2=='D'){
+        else if(square2=='D'){
           printf(" 🍇 \n");               
         }
-        else if(case2=='E'){
+        else if(square2=='E'){
           printf(" 🧁 \n");
-          //printf(PCOLOR("%d"),0);
+          
         }
-        else if(case2=='F'){
+        else if(square2=='F'){
           printf(" 🥕 \n");
-        //printf(PCOLOR("%d"),0);
+        
         }
     
     }
@@ -505,58 +493,58 @@ do{
     
     
   }
-  else if((a1==a2)&&((b1==0 && b2==taille-1)||(b1==taille-1 && b2==0))){    //condition spéciale où les 2 cases à échanger sont aux extrêmités de la même ligne
+  else if((a1==a2)&&((b1==0 && b2==size-1)||(b1==size-1 && b2==0))){    //condition spéciale où les 2 squares à échanger sont aux extrêmités de la même ligne
     printf("ok ligne\n");  //pour vérifier cette codition
-    case1=tabcopie[a2][b2].caractere;    //échange de la case1 par la case2
-    case2=tabcopie[a1][b1].caractere;    //pareil mais pour case2 par case1
-    temp=tabcopie[a1][b1].caractere;
-    tabcopie[a1][b1].caractere=tabcopie[a2][b2].caractere;
-    tabcopie[a2][b2].caractere=temp;
-    veriftot=detecteMarque(tabcopie, taille, veriftot);
-if(veriftot==1){
-      printf("case1 échangée: ");
-        if(case1=='A'){
+    square1=tabcopie[a2][b2].charactere;    //échange de la square1 par la square2
+    square2=tabcopie[a1][b1].charactere;    //pareil mais pour square2 par square1
+    temp=tabcopie[a1][b1].charactere;
+    tabcopie[a1][b1].charactere=tabcopie[a2][b2].charactere;
+    tabcopie[a2][b2].charactere=temp;
+    verif_quick=detect_mark(tabcopie, size, verif_quick);
+if(verif_quick==1){
+      printf("square1 échangée: ");
+        if(square1=='A'){
           printf(" 🍐 \n");
         }
-        else if(case1=='B'){
+        else if(square1=='B'){
           printf(" 🍉 \n");
         }
-        else if(case1=='C'){
+        else if(square1=='C'){
           printf(" 🥝 \n");
         }
-        else if(case1=='D'){
+        else if(square1=='D'){
           printf(" 🍇 \n");               
         }
-        else if(case1=='E'){
+        else if(square1=='E'){
           printf(" 🧁 \n");
-          //printf(PCOLOR("%d"),0);
+          
         }
-        else if(case1=='F'){
+        else if(square1=='F'){
           printf(" 🥕 \n");
-          //printf(PCOLOR("%d"),0);
+         
       }
     
 
-      printf("case2 échangée: ");
-        if(case2=='A'){
+      printf("square2 échangée: ");
+        if(square2=='A'){
           printf(" 🍐 \n");
         }
-        else if(case2=='B'){
+        else if(square2=='B'){
           printf(" 🍉 \n");
         }
-        else if(case2=='C'){
+        else if(square2=='C'){
           printf(" 🥝 \n");
         }
-        else if(case2=='D'){
+        else if(square2=='D'){
           printf(" 🍇 \n");               
         }
-        else if(case2=='E'){
+        else if(square2=='E'){
           printf(" 🧁 \n");
-          //printf(PCOLOR("%d"),0);
+          
         }
-        else if(case2=='F'){
+        else if(square2=='F'){
           printf(" 🥕 \n");
-        //printf(PCOLOR("%d"),0);
+        
         }
     
     }
@@ -565,69 +553,69 @@ if(veriftot==1){
 
     
   }
-  else if((b1==b2)&&((a1==0 && a2==taille-1)||(a1==taille-1 && a2==0))){ //condition spéciale où les 2 cases à échanger sont aux extrêmités de la même colonne
+  else if((b1==b2)&&((a1==0 && a2==size-1)||(a1==size-1 && a2==0))){ //condition spéciale où les 2 squares à échanger sont aux extrêmités de la même colonne
     printf("ok colonne\n");
-    case1=tabcopie[a2][b2].caractere;    //échange de la case1 par la case2
-    case2=tabcopie[a1][b1].caractere;    //pareil mais pour case2 par case1
-    temp=tabcopie[a1][b1].caractere;
-    tabcopie[a1][b1].caractere=tabcopie[a2][b2].caractere;
-    tabcopie[a2][b2].caractere=temp;
-    veriftot=detecteMarque(tabcopie, taille, veriftot);
-    if(veriftot==1){
-      printf("case1 échangée: ");
-        if(case1=='A'){
+    square1=tabcopie[a2][b2].charactere;    //échange de la square1 par la square2
+    square2=tabcopie[a1][b1].charactere;    //pareil mais pour square2 par square1
+    temp=tabcopie[a1][b1].charactere;
+    tabcopie[a1][b1].charactere=tabcopie[a2][b2].charactere;
+    tabcopie[a2][b2].charactere=temp;
+    verif_quick=detect_mark(tabcopie, size, verif_quick);
+    if(verif_quick==1){
+      printf("square1 échangée: ");
+        if(square1=='A'){
           printf(" 🍐 \n");
         }
-        else if(case1=='B'){
+        else if(square1=='B'){
           printf(" 🍉 \n");
         }
-        else if(case1=='C'){
+        else if(square1=='C'){
           printf(" 🥝 \n");
         }
-        else if(case1=='D'){
+        else if(square1=='D'){
           printf(" 🍇 \n");               
         }
-        else if(case1=='E'){
+        else if(square1=='E'){
           printf(" 🧁 \n");
-          //printf(PCOLOR("%d"),0);
+         
         }
-        else if(case1=='F'){
+        else if(square1=='F'){
           printf(" 🥕 \n");
-          //printf(PCOLOR("%d"),0);
+         
       }
     
 
-      printf("case2 échangée: ");
-        if(case2=='A'){
+      printf("square2 échangée: ");
+        if(square2=='A'){
           printf(" 🍐 \n");
         }
-        else if(case2=='B'){
+        else if(square2=='B'){
           printf(" 🍉 \n");
         }
-        else if(case2=='C'){
+        else if(square2=='C'){
           printf(" 🥝 \n");
         }
-        else if(case2=='D'){
+        else if(square2=='D'){
           printf(" 🍇 \n");               
         }
-        else if(case2=='E'){
+        else if(square2=='E'){
           printf(" 🧁 \n");
-          //printf(PCOLOR("%d"),0);
+          
         }
-        else if(case2=='F'){
+        else if(square2=='F'){
           printf(" 🥕 \n");
-        //printf(PCOLOR("%d"),0);
+        
         }
     
     }
   }
-if(veriftot==0){
-  printf("L'échange de cases ne créé pas de colonne ou de ligne de trois ou plus veuillez entrer un échange correct");
+if(verif_quick==0){
+  printf("L'échange de squares ne créé pas de colonne ou de ligne de trois ou plus veuillez entrer un échange correct");
 }
-}while(veriftot==0);  //vérifitot pour savoir si un alignement ligne/colonne de >=3 est ok
-for (i = 0; i < taille; i++) {
-    for (k = 0; k < taille; k++) {
-    tab[i][k].caractere = tabcopie[i][k].caractere;
+}while(verif_quick==0);  //vérifitot pour savoir si un alignement ligne/colonne de >=3 est ok
+for (i = 0; i < size; i++) {
+    for (k = 0; k < size; k++) {
+    tab[i][k].charactere = tabcopie[i][k].charactere;
     tab[i][k].variable = tabcopie[i][k].variable;
     }
 }
@@ -645,89 +633,89 @@ for (i = 0; i < taille; i++) {
 ///////
 
 
-bool détectionblocage(case_tableau tab[][20],int taille){         //voir annexe des cas si besoin
+bool detectionblocage(square_table tab[][20],int size){         //voir annexe des cas si besoin
     int i,j,k;
     bool verifblocage;
     verifblocage=1;
-    for(i=0;i<taille;i++){
-        for(j=0;j<taille;j++){
-            if((tab[i][j].caractere==tab[i][j+1].caractere)&&(j>=2&&j<=taille-4&&i>=1&&i<=taille-2)){
-                if(tab[i][j].caractere==tab[i][j-2].caractere||tab[i][j].caractere==tab[i-1][j-1].caractere||tab[i][j].caractere==tab[i+1][j-1].caractere||tab[i][j].caractere==tab[i][j+3].caractere||tab[i][j].caractere==tab[i-1][j+2].caractere||tab[i][j].caractere==tab[i+1][j+2].caractere){   //condition  pour le cas 1
+    for(i=0;i<size;i++){
+        for(j=0;j<size;j++){
+            if((tab[i][j].charactere==tab[i][j+1].charactere)&&(j>=2&&j<=size-4&&i>=1&&i<=size-2)){
+                if(tab[i][j].charactere==tab[i][j-2].charactere||tab[i][j].charactere==tab[i-1][j-1].charactere||tab[i][j].charactere==tab[i+1][j-1].charactere||tab[i][j].charactere==tab[i][j+3].charactere||tab[i][j].charactere==tab[i-1][j+2].charactere||tab[i][j].charactere==tab[i+1][j+2].charactere){   //condition  pour le cas 1
                     return 0;    
                 }
             }
             
             
             if(j==0){           //pour les doubles et simples sur la gauche         
-                if(i>=1&&i<=taille-2){
-                    if(tab[i][0].caractere==tab[i][taille-1].caractere){            
-                        if(tab[i][0].caractere==tab[i][taille-3].caractere||tab[i][0].caractere==tab[i-1][taille-2].caractere||tab[i][0].caractere==tab[i+1][taille-2].caractere||tab[i][0].caractere==tab[i-1][1].caractere||tab[i][0].caractere==tab[i+1][1].caractere||tab[i][0].caractere==tab[i][2].caractere){            //cas 2
+                if(i>=1&&i<=size-2){
+                    if(tab[i][0].charactere==tab[i][size-1].charactere){            
+                        if(tab[i][0].charactere==tab[i][size-3].charactere||tab[i][0].charactere==tab[i-1][size-2].charactere||tab[i][0].charactere==tab[i+1][size-2].charactere||tab[i][0].charactere==tab[i-1][1].charactere||tab[i][0].charactere==tab[i+1][1].charactere||tab[i][0].charactere==tab[i][2].charactere){            //cas 2
                             return 0;
                         }
                     }
-                    if(tab[i][0].caractere==tab[i][1].caractere){                   
-                        if(tab[i][0].caractere==tab[i][taille-2].caractere||tab[i][0].caractere==tab[i-1][taille-1].caractere||tab[i][0].caractere==tab[i+1][taille-1].caractere||tab[i][0].caractere==tab[i-1][2].caractere||tab[i][0].caractere==tab[i+1][2].caractere||tab[i][0].caractere==tab[i][3].caractere){    //cas 3
-                            return 0;
-                        }
-                    }
-                }
-            }
-            if(j==taille-2){      //pour les doubles sur la droite
-                if(i>=1&&i<=taille-2){
-                    if(tab[i][taille-2].caractere==tab[i][taille-1].caractere){            
-                        if(tab[i][taille-2].caractere==tab[i][taille-4].caractere||tab[i][taille-2].caractere==tab[i-1][taille-3].caractere||tab[i][taille-2].caractere==tab[i+1][taille-3].caractere||tab[i][taille-2].caractere==tab[i-1][0].caractere||tab[i][taille-2].caractere==tab[i+1][0].caractere||tab[i][taille-2].caractere==tab[i][1].caractere){            //cas 4
+                    if(tab[i][0].charactere==tab[i][1].charactere){                   
+                        if(tab[i][0].charactere==tab[i][size-2].charactere||tab[i][0].charactere==tab[i-1][size-1].charactere||tab[i][0].charactere==tab[i+1][size-1].charactere||tab[i][0].charactere==tab[i-1][2].charactere||tab[i][0].charactere==tab[i+1][2].charactere||tab[i][0].charactere==tab[i][3].charactere){    //cas 3
                             return 0;
                         }
                     }
                 }
             }
-            //les quatres cotées du tableau pour alignement de deux en ligne
+            if(j==size-2){      //pour les doubles sur la droite
+                if(i>=1&&i<=size-2){
+                    if(tab[i][size-2].charactere==tab[i][size-1].charactere){            
+                        if(tab[i][size-2].charactere==tab[i][size-4].charactere||tab[i][size-2].charactere==tab[i-1][size-3].charactere||tab[i][size-2].charactere==tab[i+1][size-3].charactere||tab[i][size-2].charactere==tab[i-1][0].charactere||tab[i][size-2].charactere==tab[i+1][0].charactere||tab[i][size-2].charactere==tab[i][1].charactere){            //cas 4
+                            return 0;
+                        }
+                    }
+                }
+            }
+            //les quatres cotées du table pour alignement de deux en ligne
             
             
             if(i==0&&j==0){                                     //cas 5
-                if(tab[0][0].caractere==tab[0][1].caractere){            
-                    if(tab[0][0].caractere==tab[0][taille-2].caractere||tab[0][0].caractere==tab[taille-1][taille-1].caractere||tab[0][0].caractere==tab[1][taille-1].caractere||tab[0][0].caractere==tab[0][3].caractere||tab[0][0].caractere==tab[1][2].caractere||tab[0][0].caractere==tab[taille-1][2].caractere){    
+                if(tab[0][0].charactere==tab[0][1].charactere){            
+                    if(tab[0][0].charactere==tab[0][size-2].charactere||tab[0][0].charactere==tab[size-1][size-1].charactere||tab[0][0].charactere==tab[1][size-1].charactere||tab[0][0].charactere==tab[0][3].charactere||tab[0][0].charactere==tab[1][2].charactere||tab[0][0].charactere==tab[size-1][2].charactere){    
                         return 0;
                     }
                 }    
             }
             
-            if(i==taille-1&&j==0){  //cas 6
-                if(tab[taille-1][0].caractere==tab[taille-1][1].caractere){            
-                    if(tab[taille-1][0].caractere==tab[taille-1][taille-2].caractere||tab[taille-1][0].caractere==tab[taille-2][taille-1].caractere||tab[taille-1][0].caractere==tab[0][taille-1].caractere||tab[taille-1][0].caractere==tab[taille-1][3].caractere||tab[taille-1][0].caractere==tab[taille-2][2].caractere||tab[taille-1][0].caractere==tab[0][2].caractere){    
+            if(i==size-1&&j==0){  //cas 6
+                if(tab[size-1][0].charactere==tab[size-1][1].charactere){            
+                    if(tab[size-1][0].charactere==tab[size-1][size-2].charactere||tab[size-1][0].charactere==tab[size-2][size-1].charactere||tab[size-1][0].charactere==tab[0][size-1].charactere||tab[size-1][0].charactere==tab[size-1][3].charactere||tab[size-1][0].charactere==tab[size-2][2].charactere||tab[size-1][0].charactere==tab[0][2].charactere){    
                         return 0;
                     }
                 }    
             }
             
-            if(i==0&&j==taille-2){                                     //cas 7
-                if(tab[0][taille-2].caractere==tab[0][taille-1].caractere){            
-                    if(tab[0][taille-2].caractere==tab[0][taille-4].caractere||tab[0][taille-2].caractere==tab[taille-1][taille-3].caractere||tab[0][taille-2].caractere==tab[1][taille-3].caractere||tab[0][taille-2].caractere==tab[0][1].caractere||tab[0][taille-2].caractere==tab[1][0].caractere||tab[0][taille-2].caractere==tab[taille-1][0].caractere){        
+            if(i==0&&j==size-2){                                     //cas 7
+                if(tab[0][size-2].charactere==tab[0][size-1].charactere){            
+                    if(tab[0][size-2].charactere==tab[0][size-4].charactere||tab[0][size-2].charactere==tab[size-1][size-3].charactere||tab[0][size-2].charactere==tab[1][size-3].charactere||tab[0][size-2].charactere==tab[0][1].charactere||tab[0][size-2].charactere==tab[1][0].charactere||tab[0][size-2].charactere==tab[size-1][0].charactere){        
                         return 0;
                     }
                 }    
             }
             
-            if(i==taille-1&&j==taille-2){                                       //cas 8
-                if(tab[taille-1][taille-2].caractere==tab[taille-1][taille-1].caractere){            
-                    if(tab[taille-1][taille-2].caractere==tab[0][0].caractere||tab[taille-1][taille-2].caractere==tab[taille-2][0].caractere||tab[taille-1][taille-2].caractere==tab[taille-1][1].caractere||tab[taille-1][taille-2].caractere==tab[taille-1][taille-4].caractere||tab[taille-1][taille-2].caractere==tab[taille-2][taille-3].caractere||tab[taille-1][taille-2].caractere==tab[0][taille-3].caractere){    
+            if(i==size-1&&j==size-2){                                       //cas 8
+                if(tab[size-1][size-2].charactere==tab[size-1][size-1].charactere){            
+                    if(tab[size-1][size-2].charactere==tab[0][0].charactere||tab[size-1][size-2].charactere==tab[size-2][0].charactere||tab[size-1][size-2].charactere==tab[size-1][1].charactere||tab[size-1][size-2].charactere==tab[size-1][size-4].charactere||tab[size-1][size-2].charactere==tab[size-2][size-3].charactere||tab[size-1][size-2].charactere==tab[0][size-3].charactere){    
                         return 0;
                     }
                 }
             
             }
             //cas pour le haut et le bas
-            if(i==taille-1&&j==taille-1){           //cas 9      
-                if(tab[taille-1][taille-1].caractere==tab[taille-1][0].caractere){            
-                    if(tab[taille-1][taille-1].caractere==tab[taille-1][taille-3].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][taille-2].caractere||tab[taille-1][taille-1].caractere==tab[0][taille-2].caractere||tab[taille-1][taille-1].caractere==tab[taille-1][2].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][1].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][1].caractere){ 
+            if(i==size-1&&j==size-1){           //cas 9      
+                if(tab[size-1][size-1].charactere==tab[size-1][0].charactere){            
+                    if(tab[size-1][size-1].charactere==tab[size-1][size-3].charactere||tab[size-1][size-1].charactere==tab[size-2][size-2].charactere||tab[size-1][size-1].charactere==tab[0][size-2].charactere||tab[size-1][size-1].charactere==tab[size-1][2].charactere||tab[size-1][size-1].charactere==tab[size-2][1].charactere||tab[size-1][size-1].charactere==tab[size-2][1].charactere){ 
                         return 0;
                     } 
                 }
             }
             
-            if(i==0&&j==taille-1){           //cas 10      
-                if(tab[0][0].caractere==tab[0][taille-1].caractere){            
-                    if(tab[0][0].caractere==tab[0][taille-3].caractere||tab[0][0].caractere==tab[1][taille-2].caractere||tab[0][0].caractere==tab[taille-1][taille-2].caractere||tab[0][0].caractere==tab[0][2].caractere||tab[0][0].caractere==tab[taille-1][1].caractere||tab[0][0].caractere==tab[1][1].caractere){ 
+            if(i==0&&j==size-1){           //cas 10      
+                if(tab[0][0].charactere==tab[0][size-1].charactere){            
+                    if(tab[0][0].charactere==tab[0][size-3].charactere||tab[0][0].charactere==tab[1][size-2].charactere||tab[0][0].charactere==tab[size-1][size-2].charactere||tab[0][0].charactere==tab[0][2].charactere||tab[0][0].charactere==tab[size-1][1].charactere||tab[0][0].charactere==tab[1][1].charactere){ 
                         return 0;
                     } 
                 }
@@ -738,8 +726,8 @@ bool détectionblocage(case_tableau tab[][20],int taille){         //voir annexe
                     //suite à faire pour les colonnes
             
             
-            if((tab[i][j].caractere==tab[i+1][j].caractere)&&(j>=1&&j<=taille-2&&i>=2&&i<=taille-4)){
-                if(tab[i][j].caractere==tab[i-2][j].caractere||tab[i][j].caractere==tab[i-1][j-1].caractere||tab[i][j].caractere==tab[i-1][j+1].caractere||tab[i][j].caractere==tab[i+2][j-1].caractere||tab[i][j].caractere==tab[i+2][j+1].caractere||tab[i][j].caractere==tab[i+3][j].caractere){   //condition  pour le cas 11
+            if((tab[i][j].charactere==tab[i+1][j].charactere)&&(j>=1&&j<=size-2&&i>=2&&i<=size-4)){
+                if(tab[i][j].charactere==tab[i-2][j].charactere||tab[i][j].charactere==tab[i-1][j-1].charactere||tab[i][j].charactere==tab[i-1][j+1].charactere||tab[i][j].charactere==tab[i+2][j-1].charactere||tab[i][j].charactere==tab[i+2][j+1].charactere||tab[i][j].charactere==tab[i+3][j].charactere){   //condition  pour le cas 11
                     return 0;
                 }
             }
@@ -747,73 +735,73 @@ bool détectionblocage(case_tableau tab[][20],int taille){         //voir annexe
         
                     
             if(i==0){           //pour les doubles et simples sur la gauche         
-                if(j>=1&&j<=taille-2){
-                    if(tab[0][j].caractere==tab[taille-1][j].caractere){            
-                        if(tab[0][j].caractere==tab[taille-3][j].caractere||tab[0][j].caractere==tab[taille-2][j-1].caractere||tab[0][j].caractere==tab[taille-2][j+1].caractere||tab[0][j].caractere==tab[1][j-1].caractere||tab[0][j].caractere==tab[1][j+1].caractere||tab[0][j].caractere==tab[2][j].caractere){            //cas 12
+                if(j>=1&&j<=size-2){
+                    if(tab[0][j].charactere==tab[size-1][j].charactere){            
+                        if(tab[0][j].charactere==tab[size-3][j].charactere||tab[0][j].charactere==tab[size-2][j-1].charactere||tab[0][j].charactere==tab[size-2][j+1].charactere||tab[0][j].charactere==tab[1][j-1].charactere||tab[0][j].charactere==tab[1][j+1].charactere||tab[0][j].charactere==tab[2][j].charactere){            //cas 12
                             return 0;
                         } 
                     }
-                    if(tab[0][j].caractere==tab[1][j].caractere){                   
-                        if(tab[0][j].caractere==tab[taille-2][j].caractere||tab[0][j].caractere==tab[taille-1][j-1].caractere||tab[0][j].caractere==tab[taille-1][j+1].caractere||tab[0][j].caractere==tab[2][j-1].caractere||tab[0][j].caractere==tab[2][j+1].caractere||tab[0][j].caractere==tab[3][j].caractere){    //cas 13
+                    if(tab[0][j].charactere==tab[1][j].charactere){                   
+                        if(tab[0][j].charactere==tab[size-2][j].charactere||tab[0][j].charactere==tab[size-1][j-1].charactere||tab[0][j].charactere==tab[size-1][j+1].charactere||tab[0][j].charactere==tab[2][j-1].charactere||tab[0][j].charactere==tab[2][j+1].charactere||tab[0][j].charactere==tab[3][j].charactere){    //cas 13
                             return 0;
                         }
                     }
                 }
             }
-            if(i==taille-2){                        //cas 14 
-                if(j>=1&&j<=taille-2){
-                    if(tab[taille-2][j].caractere==tab[taille-1][j].caractere){            
-                        if(tab[taille-2][j].caractere==tab[taille-4][j].caractere||tab[taille-2][j].caractere==tab[taille-3][j-1].caractere||tab[taille-2][j].caractere==tab[taille-3][j+1].caractere||tab[taille-2][j].caractere==tab[0][j-1].caractere||tab[taille-2][j].caractere==tab[0][j+1].caractere||tab[taille-2][j].caractere==tab[1][j].caractere){
+            if(i==size-2){                        //cas 14 
+                if(j>=1&&j<=size-2){
+                    if(tab[size-2][j].charactere==tab[size-1][j].charactere){            
+                        if(tab[size-2][j].charactere==tab[size-4][j].charactere||tab[size-2][j].charactere==tab[size-3][j-1].charactere||tab[size-2][j].charactere==tab[size-3][j+1].charactere||tab[size-2][j].charactere==tab[0][j-1].charactere||tab[size-2][j].charactere==tab[0][j+1].charactere||tab[size-2][j].charactere==tab[1][j].charactere){
                             return 0;
                         }
                     }
                 }
             }
             if(i==0&&j==0){                             //cas 15
-                if(tab[0][0].caractere==tab[1][0].caractere){            
-                    if(tab[0][0].caractere==tab[taille-2][0].caractere||tab[0][0].caractere==tab[taille-1][1].caractere||tab[0][0].caractere==tab[taille-1][taille-1].caractere||tab[0][0].caractere==tab[3][0].caractere||tab[0][0].caractere==tab[2][1].caractere||tab[0][0].caractere==tab[2][taille-1].caractere){    
+                if(tab[0][0].charactere==tab[1][0].charactere){            
+                    if(tab[0][0].charactere==tab[size-2][0].charactere||tab[0][0].charactere==tab[size-1][1].charactere||tab[0][0].charactere==tab[size-1][size-1].charactere||tab[0][0].charactere==tab[3][0].charactere||tab[0][0].charactere==tab[2][1].charactere||tab[0][0].charactere==tab[2][size-1].charactere){    
                         return 0;
                     }
                 }
             }
             
             
-            if(i==0&&j==taille-1){                  //cas 16
-                if(tab[0][taille-1].caractere==tab[1][taille-1].caractere){            
-                    if(tab[0][taille-1].caractere==tab[taille-2][taille-1].caractere||tab[0][taille-1].caractere==tab[taille-1][taille-2].caractere||tab[0][taille-1].caractere==tab[taille-1][0].caractere||tab[0][taille-1].caractere==tab[3][taille-1].caractere||tab[0][taille-1].caractere==tab[2][taille-2].caractere||tab[0][taille-1].caractere==tab[2][0].caractere){            
+            if(i==0&&j==size-1){                  //cas 16
+                if(tab[0][size-1].charactere==tab[1][size-1].charactere){            
+                    if(tab[0][size-1].charactere==tab[size-2][size-1].charactere||tab[0][size-1].charactere==tab[size-1][size-2].charactere||tab[0][size-1].charactere==tab[size-1][0].charactere||tab[0][size-1].charactere==tab[3][size-1].charactere||tab[0][size-1].charactere==tab[2][size-2].charactere||tab[0][size-1].charactere==tab[2][0].charactere){            
                         return 0;
                     }
                 }
             }
             
             
-            if(i==taille-2&&j==0){                  
-                if(tab[taille-2][0].caractere==tab[taille-1][0].caractere){            //cas 17
-                    if(tab[taille-2][0].caractere==tab[taille-4][0].caractere||tab[taille-2][0].caractere==tab[taille-3][1].caractere||tab[taille-2][0].caractere==tab[taille-3][taille-1].caractere||tab[taille-2][0].caractere==tab[0][1].caractere||tab[taille-2][0].caractere==tab[0][taille-1].caractere||tab[taille-2][0].caractere==tab[1][0].caractere){   
+            if(i==size-2&&j==0){                  
+                if(tab[size-2][0].charactere==tab[size-1][0].charactere){            //cas 17
+                    if(tab[size-2][0].charactere==tab[size-4][0].charactere||tab[size-2][0].charactere==tab[size-3][1].charactere||tab[size-2][0].charactere==tab[size-3][size-1].charactere||tab[size-2][0].charactere==tab[0][1].charactere||tab[size-2][0].charactere==tab[0][size-1].charactere||tab[size-2][0].charactere==tab[1][0].charactere){   
                         return 0;
                     }
                 }
             }
             
-            if(i==taille-2&&j==taille-1){                  
-                if(tab[taille-2][taille-1].caractere==tab[taille-1][taille-1].caractere){          //cas 18  
-                    if(tab[taille-2][taille-1].caractere==tab[taille-4][taille-1].caractere||tab[taille-2][taille-1].caractere==tab[taille-3][taille-2].caractere||tab[taille-2][taille-1].caractere==tab[taille-3][0].caractere||tab[taille-2][taille-1].caractere==tab[0][0].caractere||tab[taille-2][taille-1].caractere==tab[0][taille-2].caractere||tab[taille-2][taille-1].caractere==tab[1][taille-1].caractere){  
+            if(i==size-2&&j==size-1){                  
+                if(tab[size-2][size-1].charactere==tab[size-1][size-1].charactere){          //cas 18  
+                    if(tab[size-2][size-1].charactere==tab[size-4][size-1].charactere||tab[size-2][size-1].charactere==tab[size-3][size-2].charactere||tab[size-2][size-1].charactere==tab[size-3][0].charactere||tab[size-2][size-1].charactere==tab[0][0].charactere||tab[size-2][size-1].charactere==tab[0][size-2].charactere||tab[size-2][size-1].charactere==tab[1][size-1].charactere){  
                         return 0;
                     }
                 }
             }
             
-            if(i==taille-1&&j==taille-1){                  
-                if(tab[taille-1][taille-1].caractere==tab[0][taille-1].caractere){        //cas 19    
-                    if(tab[taille-1][taille-1].caractere==tab[taille-3][taille-1].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][taille-2].caractere||tab[taille-1][taille-1].caractere==tab[taille-2][0].caractere||tab[taille-1][taille-1].caractere==tab[1][0].caractere||tab[taille-1][taille-1].caractere==tab[1][taille-2].caractere||tab[taille-1][taille-1].caractere==tab[2][taille-1].caractere){         
+            if(i==size-1&&j==size-1){                  
+                if(tab[size-1][size-1].charactere==tab[0][size-1].charactere){        //cas 19    
+                    if(tab[size-1][size-1].charactere==tab[size-3][size-1].charactere||tab[size-1][size-1].charactere==tab[size-2][size-2].charactere||tab[size-1][size-1].charactere==tab[size-2][0].charactere||tab[size-1][size-1].charactere==tab[1][0].charactere||tab[size-1][size-1].charactere==tab[1][size-2].charactere||tab[size-1][size-1].charactere==tab[2][size-1].charactere){         
                         return 0;
                     }
                 }
             }
             
             if(i==0&&j==0){                  
-                if(tab[0][0].caractere==tab[taille-1][0].caractere){     //cas 20       
-                    if(tab[0][0].caractere==tab[taille-3][0].caractere||tab[0][0].caractere==tab[taille-2][taille-1].caractere||tab[0][0].caractere==tab[taille-2][1].caractere||tab[0][0].caractere==tab[1][1].caractere||tab[0][0].caractere==tab[1][taille-1].caractere||tab[0][0].caractere==tab[2][0].caractere){   
+                if(tab[0][0].charactere==tab[size-1][0].charactere){     //cas 20       
+                    if(tab[0][0].charactere==tab[size-3][0].charactere||tab[0][0].charactere==tab[size-2][size-1].charactere||tab[0][0].charactere==tab[size-2][1].charactere||tab[0][0].charactere==tab[1][1].charactere||tab[0][0].charactere==tab[1][size-1].charactere||tab[0][0].charactere==tab[2][0].charactere){   
                         return 0;
                     }
                 }
@@ -829,13 +817,13 @@ bool détectionblocage(case_tableau tab[][20],int taille){         //voir annexe
 
 
 void resume_game() {
-  int taille, different;
+  int size, different;
   bool verifblocage;
   long score;
   long high_score;
   
   
-  case_tableau tab[20][20]; // Définition du tableau
+  square_table tab[20][20]; // Définition du table
 
   
 
@@ -849,17 +837,17 @@ void resume_game() {
   }
 
 
-  fscanf(save, "Tab size : %d\n", &taille);
+  fscanf(save, "Tab size : %d\n", &size);
   fscanf(save, "Nbr of different(s) possible symbols : %d\n", &different);
   fscanf(save, "High-Score : %ld\n", &high_score);
   fscanf(save, "Score : %ld\n", &score);
   
 
 
-  for (int i=0; i < taille; i++) {
-    for (int k=0; k < taille; k++) {
+  for (int i=0; i < size; i++) {
+    for (int k=0; k < size; k++) {
       
-      fscanf(save, "%c", &tab[i][k].caractere);     // Écriture du tableau dans le fichier sauvegarde
+      fscanf(save, "%c", &tab[i][k].charactere);     // Écriture du table dans le fichier sauvegarde
     }
   }
 
@@ -872,14 +860,14 @@ void resume_game() {
                 //netoyage de la zone de jeu
     //clrscr();                                       //nettoyage du terminal
 printf("Votre score est de %ld \n",score); 
-    remplacement(tab, taille,different,score);
-    Affichagemoji(tab, taille);        
-    echange(tab,taille);            //échange
-    score=remplacement(tab, taille,different,score);
-    verifblocage=détectionblocage(tab,taille);
+    replacement(tab, size,different,score);
+    Displaymoji(tab, size);        
+    exchange(tab,size);            //échange
+    score=replacement(tab, size,different,score);
+    verifblocage=detectionblocage(tab,size);
     
     }while(verifblocage==0);
-    Affichagemoji(tab, taille);
+    Displaymoji(tab, size);
     printf("C'est terminé plus aucun mouvement n'est possible votre score est de %ld\n",score);
 }
 
@@ -888,7 +876,7 @@ printf("Votre score est de %ld \n",score);
     
 
 void setting_parameters() {
-  int taille, different;
+  int size, different;
   bool verifblocage;
   long score = 0;
   long high_score = 0;
@@ -896,29 +884,29 @@ void setting_parameters() {
   
   
     do {
-        printf("Entrez la taille du tableau (entre 5 et 20) : ");
-        scanf("%d", &taille);
-    } while (taille < 5 || taille > 20);
+        printf("Entrez la size du table (entre 5 et 20) : ");
+        scanf("%d", &size);
+    } while (size < 5 || size > 20);
     
     do {
         printf("Entrez le nombre de forme différentes (entre 4 et 6) : ");
         scanf("%d", &different);
     } while (different < 4 || different > 6);
     
-    case_tableau tab[20][20]; // Définition du tableau
+    square_table tab[20][20]; // Définition du table
     
     srand(time(NULL)); // Génération aléatoire
     
     int i, k;
-    for (i = 0; i < taille; i++) {
-        for (k = 0; k < taille; k++) {
+    for (i = 0; i < size; i++) {
+        for (k = 0; k < size; k++) {
         // Génération aléatoire des caractères
-        tab[i][k].caractere = 'A' + rand() % different; //  symboles différents choisit lors du scanf
-        tab[i][k].variable = 0; // variable à zéro pour le compteur
+        tab[i][k].charactere = 'A' + rand() % different; //  symboles différents choisit lors du scanf
+        tab[i][k].variable = 0; // variable à zéro pour le counter
       }
     }
-    Affichagemoji(tab, taille);        //début du jeu
-    remplacement(tab, taille,different,score);
+    Displaymoji(tab, size);        //début du jeu
+    replacement(tab, size,different,score);
     score=0;
     //high_score à définir avec si aucun fichier de sauvegarde existe alors = 0 sinon = au fichier de sauvegarde
     do{                                     //boucle de verifblocage
@@ -933,16 +921,16 @@ void setting_parameters() {
     
   }
 
-  fprintf(save, "Tab size : %d\n", taille);
+  fprintf(save, "Tab size : %d\n", size);
   fprintf(save, "Nbr of different(s) possible symbols : %d\n", different);
   fprintf(save, "Score : %ld\n", score);
   
 
 
-  for (int i=0; i < taille; i++) {
-    for (int k=0; k < taille; k++) {
+  for (int i=0; i < size; i++) {
+    for (int k=0; k < size; k++) {
       
-      fprintf(save, "%c", tab[i][k].caractere);     // Écriture du tableau dans le fichier sauvegarde
+      fprintf(save, "%c", tab[i][k].charactere);     // Écriture du table dans le fichier sauvegarde
     }
     fprintf(save, "\n");
   }
@@ -977,13 +965,13 @@ void setting_parameters() {
 
       
     printf("Votre score est de %ld \n",score);                                     
-    Affichagemoji(tab, taille);        
-    echange(tab,taille);            //échange
-    score=remplacement(tab, taille,different,score);
-    verifblocage=détectionblocage(tab,taille);
+    Displaymoji(tab, size);        
+    exchange(tab,size);            //échange
+    score=replacement(tab, size,different,score);
+    verifblocage=detectionblocage(tab,size);
     
     }while(verifblocage==0);
-    Affichagemoji(tab, taille);
+    Displaymoji(tab, size);
     printf("c'est terminé plus aucun mouvement n'est possible\nvotre score est de %ld",score);
 }
 
@@ -1005,7 +993,7 @@ void Home_menu(){
   printf("\n");
   printf("\x1b[34m--------------------------------\n");  
   printf("\x1b[34m----------------------------------\n");
-  printf(PCOLOR("%d"),0);
+  printf(COLOR("%d"),0);
 
   printf("\n \n");
 
@@ -1013,7 +1001,7 @@ void Home_menu(){
   printf("\x1b[32m2." "\x1B[36mReprendre\n\n");
   printf("\x1b[32m3." "\x1B[36mCrédits\n\n");
   printf("\x1B[31m4. Quitter le jeu\n\n\n");
-  printf(PCOLOR("%d"),0);
+  printf(COLOR("%d"),0);
   
   
  // while (selection<1 || selection>4) {
@@ -1021,26 +1009,26 @@ void Home_menu(){
   do{
     
     printf("\x1B[33mVeuillez entrer" "\x1B[32m [1]" "\x1B[33m," " \x1B[32m[2]" "\x1B[33," "\x1B[32m [3]" "\x1B[33m ou " "\x1B[31m[4]" "\x1B[33m :\n" );         // Demande à l'utilisateur de faire son choix
-    printf(PCOLOR("%d"),0);
+    printf(COLOR("%d"),0);
     scanf("%s", &selection);              // Récuperation de la réponse du joueur
     if (selection=='1'){
       
       printf("\x1B[33mC'est parti pour une nouvelle aventure ! \n");     // Lancement d'une nouvelle sauvegarde
-      printf(PCOLOR("%d"),0);
+      printf(COLOR("%d"),0);
       setting_parameters();
     }
 
     else if (selection=='2') {
       
       printf("\x1B[33mHeureux de te retrouver, on est reparti !\n" );      // Lancement d'une sauvegarde précédente
-      printf(PCOLOR("%d"),0);
+      printf(COLOR("%d"),0);
       resume_game();
     }
 
     else if (selection=='3') {
       
-      printf("\x1B[33mCy Crush par :\n\n\n" "\x1B[34mBLUTEAU Corentin\n\n" "\x1B[32mLY Athyna\n\n" "\x1B[36mANDRIANAVALONA Timothé\n\n");                   // Affichage des crédits
-      printf(PCOLOR("%d"),0);
+      printf("\x1B[33mCy Crush par :\n\n\n" "\x1B[34mBLUTEAU Corentin\n\n" "\x1B[32mLY Athyna\n\n" "\x1B[36mANDRIANAVALONA Timothé\n\n");                   // Display des crédits
+      printf(COLOR("%d"),0);
       selection=5;                                   // Retour au début de la boucle, redemande choix du joueur
 
       
@@ -1049,14 +1037,14 @@ void Home_menu(){
     else if (selection=='4') {
       
       printf("\x1B[33mSalut, j'espère qu'on se reverra très bientôt ! :D\n");     // message d'au revoir, sayonara !
-      printf(PCOLOR("%d"),0);
+      printf(COLOR("%d"),0);
       exit(0);
     }
 
     else {
       
       printf("\x1B[31mVeuillez réessayer x(\n");    // Valeur entrée non valide --> retour au début de la boucle
-      printf(PCOLOR("%d"),0);
+      printf(COLOR("%d"),0);
     }
   }while ((selection!= '4') || (selection!= '3') || (selection!= '2') || (selection!= 1));
 
@@ -1077,17 +1065,3 @@ int main() {
 
 return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
