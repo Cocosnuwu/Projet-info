@@ -564,7 +564,7 @@ if(verif_quick==1){
     }
   }
 if(verif_quick==0){
-  printf("L'échange de squares ne créé pas de colonne ou de ligne de trois ou plus veuillez entrer un échange correct");
+  printf("L'échange de squares ne créé pas de colonne ou de ligne de trois ou plus veuillez entrer un échange correct\n");
 }
 }while(verif_quick==0);  //vérifitot pour savoir si un alignement ligne/colonne de >=3 est ok
 for (i = 0; i < size; i++) {
@@ -822,7 +822,7 @@ void resume_game() {
     
     }while(verifblocage==0);
     Displaymoji(tab, size);
-    printf("C'est terminé plus aucun mouvement n'est possible votre score est de %ld\n",score);
+    printf("C'est terminé plus aucun mouvement n'est possible votre score est de %ld \n",score);
 }
 
 
