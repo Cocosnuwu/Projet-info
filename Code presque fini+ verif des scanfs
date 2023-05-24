@@ -298,6 +298,15 @@ double replacement(square_table tab[][20],int size,int different,long score){
     }while(verif==1 || verif_quick==1);    //le do while ici sert pour ne pas sortir de la boucle tant que un des deux booléens est égale à 1
     return score;
 }
+
+
+
+void vide_buffer(){         //pour vérifier les scanfs
+  while(getchar()!='\n'){
+  }
+}
+
+
 void exchange(square_table tab[][20],int size){
   int a1, b1, a2, b2;    //a1 : ligne de la 1ère square à échanger et b1 : colonne de cette 1ère square
                          // pareil pour a2 et b2
@@ -305,7 +314,7 @@ void exchange(square_table tab[][20],int size){
   b1=0;
   a2=0;
   b2=0;
-  int temp;
+  int temp, check;
   int i, k;
   square_table tabcopie[20][20]; 
   bool verif_quick;
@@ -324,9 +333,11 @@ do{
     
     do{  //pour vérifier l'inverse : on veut que les a et b soient compris entre 0 et _ inclus
       printf("\nDonnez les coordonnées de la 1ère case : ligne, puis colonne\n"); 
-      scanf("%d",&a1);
-      scanf("%d",&b1);
-    }while (a1<0 || a1>=size || b1<0 || b1>=size );
+      check=scanf("%d",&a1);
+      check=scanf("%d",&b1);
+      vide_buffer();
+    }while (a1<0 || a1>=size || b1<0 || b1>=size || check!=1);
+    
     square1=tabcopie[a1][b1].character;
     
     printf("square1: ");
@@ -353,10 +364,12 @@ do{
 
 
     do{
-      printf("Donnez les coordonnées de la 2nd case : ligne, puis colonne\n");
-      scanf("%d",&a2);
-      scanf("%d",&b2);
-    }while (a2<0 || a2>=size || b2<0 || b2>=size);
+      printf("\nDonnez les coordonnées de la 2nd case : ligne, puis colonne\n");
+      check=scanf("%d",&a2);
+      check=scanf("%d",&b2);
+      vide_buffer();
+    }while (a2<0 || a2>=size || b2<0 || b2>=size || check!=1);
+    
     square2=tabcopie[a2][b2].character;
 
     printf("square2: ");
@@ -831,7 +844,7 @@ void resume_game() {
 
 
 void setting_parameters() {
-  int size, different;
+  int size, different, check;
   bool verifblocage;
   long score = 0;
   long high_score = 0;
@@ -839,14 +852,17 @@ void setting_parameters() {
   
   
     do {
-        printf("Entrez la size du table (entre 5 et 20) : ");
-        scanf("%d", &size);
-    } while (size < 5 || size > 20);
+      printf("Entrez la size du table (entre 5 et 20) : ");
+      check=scanf("%d", &size);
+      vide_buffer();
+    } while (size < 5 || size > 20 || check!=1);
     
     do {
         printf("Entrez le nombre de forme différentes (entre 4 et 6) : ");
-        scanf("%d", &different);
-    } while (different < 4 || different > 6);
+        check=scanf("%d", &different);
+        vide_buffer();
+    } while (different < 4 || different > 6 || check!=1);
+    
     
     square_table tab[20][20]; // Définition du table
     
