@@ -796,7 +796,7 @@ void SaveScore(Score newScore){
         printf("Erreur lors de l'ouverture du fichier.\n");
         
     } else {
-        fprintf(Scorefile, "%ld\n", score.score);
+        fprintf(Scorefile, "%ld\n", newScore.score);
         fclose(Scorefile);
         printf("Score sauvegardé avec succès.\n");
   }
