@@ -914,8 +914,8 @@ printf("Votre score est de : %ld \n",score.score);
 
   fscanf(save, "Tab size : %d\n", &size);
   fscanf(save, "Nbr of different(s) possible symbols : %d\n", &different);
-  //fscanf(save, "High-Score : %ld\n", &high_score);
-  //fscanf(save, "Score : %ld\n", &score);
+  fscanf(save, "High-Score : %ld\n", &high_score);
+  fscanf(save, "Score : %ld\n", &score);
   
 
 
