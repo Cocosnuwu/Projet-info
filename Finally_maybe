@@ -923,6 +923,7 @@ printf("Votre score est de : %ld \n",score.score);
     for (int k=0; k < size; k++) {
       
       fscanf(save, "%c", &tab[i][k].character);     // Lecture des données du tableau dans le fichier sauvegarde
+      tab[i][k].variable=0;
     }
   }
 
