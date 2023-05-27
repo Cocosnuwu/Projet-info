@@ -1,0 +1,68 @@
+README :
+
+Présentation générale de notre projet : jeu CY Crush
+
+Notre jeu se présente comme un tableau de différents symboles générés aléatoirement.
+Le joueur doit alors échanger 2 éléments côté à côte, afin de créer des combinaisons de 3 ou plus.
+Ces combinaisons forment une ligne ou colonne, à l'intérieur du tableau ou aux extrémités du tableau.
+Lorsqu'une combinaison apparait, celle-ci disparait, au profit de d'autres éléments, soumis à la gravité allant de gauche à droite.
+Le jeu se termine lorsque plus aucune combinaison n'est possible de créer.
+
+
+(amélioration personnelles : symboles=emojis, menu d'accueil,code de triche ...)
+
+
+
+(exécution, exemples)
+De manière générale, nous avons utilisés plusieurs fonctions, procédures, fichiers, structure, .... pour réaliser toutes les différentes fonctionnalités.
+Par exemple, l'échange de cases du tableau est possible à partir d'une procédure, ou encore l'utilisation d'une fonction permet de détecter des combinaisons. De la même manière, les fichiers permettent de faire la page d'accueil, et la structure permet de définir les cases du tableau.
+
+
+expliquer struct du projet : division du code en plusieurs procédures/fonctions qui font une fonctionnalité chacune et s'utilisent entre elles (voir schéma dans le github)
+
+
+
+
+
+
+
+
+
+
+
+
+Ce que fait le programme (dans l'ordre) : solutions:
+•	menu d'affichage : pour que l'utilisateur décide de quoi faire
+- commencer une nouvelle partie :
+- reprendre une partie déjà commencée : void resume_game
+- affichage des crédits :
+- quitter le jeu :
+•	paramètres : dans la procédure setting_parameters :
+- taille du tableau : boucle do-while pour que taille soit entre 5 et 20
+- nombre d'éléments différents : boucle do-while, pour que nb entre 4 et 6
+- définition du tableau, de type de la structure.
+- génération des caractères aléatoirement dans le tableau : avec rand()
+- + condition tq pas des cases de 3 à côté : avec fonction detect_mark (de type de la structure)
+- affichage du tableau avec des caractères, puis avec des emojis : 1 procédure pour les caractères, puis avec ifs, on remplace les caractères par les emojis
+
+•	déroulement des parties :
+ - affichage du score :
+
+- échange : void exchange :
+   - coordonnées des 2 cases à échanger : do-while pour coordonnées correctes
+   - condition : cases qui, après l'échange, forment bien une ligne/colonne : 
+   - condition : cases bien à côtés (dans ou aux extrémités, du tbl) pour échange possible : ifs
+   - si respect de ces conditions : alors échange se fait : dans la procédure, "~case1=case2"
+   - combinaison donc ligne/colonne est supprimée : fct double remplacement ?
+
+- génération de nouveaux caractères à la place avec gravité vers la droite : void move_left
+
+- mise à jour du score :
+
+- boucle qui recommence échange : avec condition d'arrêt : plus de combinaisons possibles
+
+- fin : affichage du score et nombre de déplacements fait (car obj : le moins possible) :
+
+
+différents fichiers
+fct : (_.c) expliquer les plus importantes fcts : principes pas trop détails
